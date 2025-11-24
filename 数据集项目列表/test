@@ -1,9 +1,0 @@
-## 📝 Project 5: libxml2 漏洞注入总结 (Ground Truth)
-
-| ID | 项目名称 | 基础版本 | 漏洞类型 (Type) | 注入文件:行号 (Location) | 注入函数 (Function) | 触发原因 (Root Cause) | 对应的 CVE (模拟) |
-| :---: | :---: | :---: | :--- | :--- | :--- | :--- | :---: |
-| 1 | libxml2 | v2.9.10 | Stack Buffer Overflow | `parser.c`: ~1312 | `xmlParseName` | 使用 `sprintf` 将超长 XML 标签名写入 16 字节栈缓冲区。 | Sim-CVE-006 |
-| 2 | libxml2 | v2.9.10 | Double Free | `tree.c`: ~1103 | `xmlFreeNode` | 在节点清理函数中重复调用 `xmlFree` 释放同一指针。 | Sim-CVE-007 |
-| 3 | libxml2 | v2.9.10 | Use-After-Free | `tree.c`: ~1700 | `xmlUnlinkNode` | 节点解链后，访问已被逻辑删除的 `prev` 属性。 | Sim-CVE-008 |
-| 4 | libxml2 | v2.9.10 | Null Pointer Deref | `tree.c`: ~1475 | `xmlAddChild` | 删除 `if (parent == NULL)` 安全检查，强制访问 NULL 指针的成员。 | Sim-CVE-009 |
-| 5 | libxml2 | v2.9.10 | Format String | `error.c`: ~1335 | `xmlParserError` | 错误地将不可控的格式化字符串变量 (`str`) 作为 `fprintf` 的参数。 | Sim-CVE-010 |
